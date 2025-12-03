@@ -1,0 +1,73 @@
+[project]
+name = "advent-of-code-puzzle"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "black>=25.11.0",
+    "pre-commit>=4.5.0",
+    "ruff>=0.14.7",
+]
+
+[tool.black]
+line-length = 100
+target-version = ['py312']
+include = '\.pyi?$'
+skip-string-normalization = true
+exclude = '(\.git|\.pyi)'
+
+[tool.ruff]
+lint.select = [
+    "E", # pycodestyle
+    "W", # pycodestyle
+    "F", # pyflakes
+    "C", # mccabe (complexity)
+    "PL", # pylint. Activating this activates everything: PLC PLE PLR etc
+    "YTT", # flake8-2020
+    "T10", # ipdb
+    "DJ", # flake8-django
+    "EXE", # flake8-executable
+    "ICN", # flake8-import-conventions
+    "PYI", # flake8-pyi
+    "TID", # flake8-tidy-imports
+    "INT", # flake8-gettext
+    "PGH", # pygrep-hooks
+    "RSE", # flake8-raise
+    "PIE", # flake8-pie - easy
+    "ISC", # flake8-implicit-str-concat - easy
+    "INP", # flake8-no-pep420
+    "C4", # flake8-comprehensions
+    "RUF", # ruff specific rules
+    "SIM", # flake8-simplify
+    "PTH", # flake8-pathlib
+]
+lint.ignore = [
+    "A003", # Class attribute {name} is shadowing a python builtin
+    "F401", # imported, but unused (required to detect DAG)
+    "F403", # 'from module import *' used; unable to detect undefined names
+    "E501", # line too long
+    "E731", # Do not assign a `lambda` expression, use a `def`
+    "F405", # ENV_OR_PM` may be undefined, or defined from star imports: `.defaults
+    "DJ001", # null=true pe CharField
+    "DJ006", # Do not use exclude with ModelForm, use fields instead
+    "PLR2004", # Magic value used in comparison, consider replacing 2 with a constant variable
+    "PLR0912", # too many branches
+    "PLR0911", # too many return args
+    "PLR0913", # too many args to function call
+    "PLR0915", # too many statements
+    "PLW2901", # for loop variable overwritten by assignment target
+    "PLR5501", # Consider using `elif` instead of `else` then `if` to remove one indentation level
+    "PLR1711", # Useless `return` statement at end of function
+    "PLW0120", # `else` clause on loop without a `break` statement; remove the `else` and de-indent all the code inside it
+    "PLC1901", # `value == ''` can be simplified to `not value` as an empty string is falsey
+    "PLW0603", # Using the global statement to update `CALLS_COUNTER` is discouraged"
+    "PLW0602", # Using global for `CALLS_COUNTER` but no assignment is done"
+    "SIM117", # Use a single `with` statement with multiple contexts instead of nested `with` statements" -- yattag??
+    "RUF012", # Mutable class attributes should be annotated with `typing.ClassVar`
+    "PYI024", # Use `typing.NamedTuple` instead of `collections.namedtuple`
+    "DJ008", # Model does not define `__str__` method
+    "PERF401", # Use a list comprehension to create a transformed list - not always the best choice
+    "W291", # Trailing whitespace
+]
