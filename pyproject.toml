@@ -2,13 +2,20 @@
 name = "advent-of-code-puzzle"
 version = "0.1.0"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "ipdb>=0.13.13",
+    "pydantic>=2.12.5",
+    "termcolor>=3.2.0",
+]
 
 [dependency-groups]
 dev = [
     "black>=25.11.0",
+    "ipdb>=0.13.13",
     "pre-commit>=4.5.0",
+    "pydantic>=2.12.5",
     "ruff>=0.14.7",
+    "termcolor>=3.2.0",
 ]
 
 [tool.black]

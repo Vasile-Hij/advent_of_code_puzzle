@@ -1,0 +1,12 @@
+[project]
+name = "advent-of-code-puzzle"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = []
+
+[tool.ruff]
+ignore = ["ISC001"]
+line-length = 88
+
+[tool.black]
+line-length = 88
