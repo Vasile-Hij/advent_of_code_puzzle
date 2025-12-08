@@ -1,19 +1,18 @@
 from datetime import datetime
 
 
-START_YEAR = 15
-CURRENT_YEAR = datetime.now().year % 100
+START_YEAR: int = 15
+CURRENT_YEAR: int = datetime.now().year % 100
 
-OLD_DAYS = 25
-NEW_DAYS = 12
+OLD_DAYS: int = 25
+NEW_DAYS: int = 12
 
-YEAR_CHANGED = (
-    25 - 1
-)  # in 2025 rules changed from 25 days to 12 days, so 2015-2024 with 25 days
+# in 2025 rules changed from 25 days to 12 days, so 2015-2024 with 25 days
+YEAR_CHANGED: int = 25 - 1
 
 
-SCRIPT_TEXT = """
-from utils import SolverBase
+SCRIPT_TEXT: str = """
+from utils.core import SolverBase
 
 title = ''
 
