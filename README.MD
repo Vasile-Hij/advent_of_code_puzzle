@@ -54,4 +54,4 @@ If running without a sample will also create a new input file named `1.txt`
 
 ## License
 
-MIT
+[MIT License](LICENSE)
