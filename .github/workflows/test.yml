@@ -1,0 +1,41 @@
+name: Python AoC Solver
+
+on:
+    push:
+        branches: ["main"]
+    pull_request:
+        branches: ["main"]
+
+permissions:
+    contents: read
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Install UV
+              uses: astral-sh/setup-uv@v5
+              with:
+                  enable-cache: true
+                  version: latest
+
+            - name: Install dependencies
+              run: |
+                  uv sync --dev --frozen  # Installs pyproject.toml + [tool.uv.dev-dependencies]
+
+            - name: Lint with Ruff
+              run: |
+                  uv run ruff check . --fix  # Auto-fixes issues
+                  uv run ruff format . --check  # Verify formatting
+
+            - name: Type check with pyright
+              run: uv run pyright .
+
+            - name: Test with pytest
+              run: |
+                  uv run pytest tests/ -v --cov=. --cov-report=html
+
+            - name: Upload coverage
+              uses: codecov/codecov-action@v4
