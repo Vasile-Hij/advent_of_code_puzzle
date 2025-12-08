@@ -14,6 +14,9 @@ dev = [
     "ipdb>=0.13.13",
     "pre-commit>=4.5.0",
     "pydantic>=2.12.5",
+    "pyright>=1.1.407",
+    "pytest>=9.0.2",
+    "pytest-cov>=7.0.0",
     "ruff>=0.14.7",
     "termcolor>=3.2.0",
 ]
