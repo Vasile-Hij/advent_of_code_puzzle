@@ -3,7 +3,7 @@ SHELL := /bin/zsh
 
 UV_BIN ?= uv
 
-.PHONY: init install-uv setup up down help lock
+.PHONY: init install-uv setup up down help lock lint test run
 
 help:
 	@cat Makefile
@@ -37,5 +37,12 @@ lock:
 
 init: setup lock up
 
-pyright:
-	uv run pyright
+lint:
+	uv run ruff check . --fix
+	uv run ruff format .
+	uv run pyright .
+
+test:
+	uv run pytest tests/ -v
+
+pyright: lint test

@@ -2,7 +2,6 @@ from __future__ import annotations
 import logging
 from pathlib import Path
 from typing import Literal, TextIO, List, Union
-from termcolor import colored
 
 
 logger = logging.getLogger(__name__)

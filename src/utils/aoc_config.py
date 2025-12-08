@@ -12,7 +12,7 @@ YEAR_CHANGED: int = 25 - 1
 
 
 SCRIPT_TEXT: str = """
-from utils import SolverBase
+from utils.core import SolverBase
 
 title = ''
 
