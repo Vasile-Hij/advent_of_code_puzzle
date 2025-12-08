@@ -17,7 +17,9 @@ class LineInput(BaseModel):
     @classmethod
     def validate_code(cls, value: str) -> str:
         if not value or len(str(value)) != 4:
-            raise ValueError(f'{value=} is not accepted! Try something like: "-id 2501"')
+            raise ValueError(
+                f'{value=} is not accepted! Try something like: "-id 2501"'
+            )
 
         year = value // 100
         days = value % 100
@@ -50,7 +52,7 @@ class LineInput(BaseModel):
     def validate_sample(cls, value: str) -> str:
         if value is not None and value != "s":
             raise ValueError('Sample should be "s"')
-        return "sample"
+        return "sample" if value else value
 
     @property
     def year(self):
