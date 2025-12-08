@@ -1,7 +1,7 @@
 from __future__ import annotations
 import logging
 from pathlib import Path
-from typing import TextIO, List, Union
+from typing import Literal, TextIO, List, Union
 from termcolor import colored
 
 
@@ -42,10 +42,14 @@ class FileManager:
             logger.info(f"Auto-created: {file_path}")
 
         with cls.retrieve(template, **kwargs) as file:
-            if kwargs["method"] == "display_raw":
-                return file.read()
-            if kwargs["method"] == "solve":
-                return [line.rstrip("\n") for line in file]
+            method: Literal["display_raw", "solve"] = kwargs["method"]
+            match method:
+                case "display_raw":
+                    return file.read()
+                case "solve":
+                    return [line.rstrip("\n") for line in file]
+                case _:
+                    raise ValueError(f"Unknown method: {method}")
 
     @classmethod
     def create_directory(cls, dir_name: Union[str, Path]) -> None:

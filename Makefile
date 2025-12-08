@@ -36,3 +36,6 @@ lock:
 	@echo "Created/updated uv.lock"
 
 init: setup lock up
+
+pyright:
+	uv run pyright
