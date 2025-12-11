@@ -39,12 +39,7 @@ class Command:
         self.display_solved(year, day, sample, part)
 
     def display_input(self, year, day, sample, part):
-        if sample:
-            text = self.get_input(year, day, sample, part, method="display_raw_sample")
-        else:
-            text = self.get_input(
-                year, day, sample, part, method="display_raw_input_trim"
-            )
+        text = self.get_input(year, day, sample, part, method="display_raw")
 
         print("-->")
         print(colored(text, "green"))
