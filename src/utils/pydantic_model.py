@@ -20,7 +20,7 @@ ALLOWED_PATTERNS = {
 
 class LineInput(BaseModel):
     script_id: StrictInt
-    part: StrictStr | None
+    part: StrictStr | None = None
     sample: StrictStr | None
     results: Optional[int] = None
 
@@ -54,7 +54,7 @@ class LineInput(BaseModel):
 
     @field_validator("part", mode="before")
     @classmethod
-    def validate_part(cls, value: Any) -> StrictStr:
+    def validate_part(cls, value: Any) -> Optional[StrictStr]:
         if value is None:
             return None
 

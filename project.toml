@@ -8,6 +8,9 @@ version = "0.1.0"
 requires-python = ">=3.12"
 dependencies = []
 
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
 [tool.ruff]
 ignore = ["ISC001"]
 line-length = 88
@@ -15,13 +18,22 @@ line-length = 88
 [tool.black]
 line-length = 88
 
-[tool.uv.dev-dependencies]
-ruff = ">=0.14.0"
-pytest = ">=8.0"
-pytest-cov = ">=5.0"
-pyright = ">=1.1"
+[tool.uv]
+dev-dependencies = [
+    "ruff>=0.14.0",
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "pyright>=1.1",
+    "pre-commit",
+    "black",
+    "ipdb",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
 addopts = "-v"
+
+
+[tool.uv.sources]
+advent-of-code-puzzle = { path = ".", editable = true }
