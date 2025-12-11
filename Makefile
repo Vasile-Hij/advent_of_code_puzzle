@@ -16,7 +16,7 @@ install-uv:
 setup: install-uv
 	@test -f pyproject.toml || $(UV_BIN) init --bare
 	@echo "created pyproject.toml"
-	$(UV_BIN) add --dev ruff pre-commit black pydantic termcolor ipdb
+	$(UV_BIN) add --dev ruff pre-commit black pydantic termcolor ipdb pytest pytest-cov pyright
 	$(UV_BIN) sync
 	@touch .pre-commit-config.yaml'
 	@echo "Need to add info to '.pre-commit-config.yaml' file."
@@ -26,6 +26,7 @@ setup: install-uv
 up: 
 	$(UV_BIN) sync
 	@test -d .venv || $(UV_BIN) sync
+	$(UV_BIN) pip install -e .
 	@source .venv/bin/activate && cd src && exec $$SHELL -l
 
 down:

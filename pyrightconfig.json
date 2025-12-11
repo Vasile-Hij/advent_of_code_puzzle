@@ -1,19 +1,25 @@
 {
-	"include": [
-		"src",
-		"tests"
-	],
-	"exclude": [
-		"**/__pycache__",
-		".venv",
-		".pytest_cache",
-		".ruff_cache"
-	],
-	"executionEnvironments": [
-		{
-			"root": "src"
-		}
-	],
-	"pythonVersion": "3.12",
-	"pythonPlatform": "Linux"
+    "include": [
+        "src",
+        "tests"
+    ],
+    "exclude": [
+        "**/__pycache__",
+        ".venv",
+        ".pytest_cache",
+        ".ruff_cache"
+    ],
+    "executionEnvironments": [
+        {
+            "root": "src"
+        },
+        {
+            "root": "tests",
+            "extraPaths": [
+                "src"
+            ]
+        }
+    ],
+    "pythonVersion": "3.12",
+    "pythonPlatform": "Linux"
 }

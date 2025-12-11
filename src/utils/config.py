@@ -1,4 +1,5 @@
 from __future__ import annotations
+import json
 import logging
 from pathlib import Path
 from typing import Literal, TextIO, List, Union
@@ -13,6 +14,7 @@ class FileManager:
     INPUT_DAY_SAMPLE = "input/{year}/{day}_{sample}_{part}.txt"
     SCRIPT_PATH = "puzzle_solver.{year}.{day}"
     INIT_FILE = "__init__.py"
+    RESULTS = "puzzle_solved/results.json"
 
     @classmethod
     def get_path(cls, template: str, **kwargs) -> Path:
@@ -28,7 +30,7 @@ class FileManager:
         return path_obj.open("r")
 
     @classmethod
-    def read_input_file(cls, template: str, **kwargs):
+    def read_input_file(cls, template: str, **kwargs) -> Union[str, tuple[str, ...]]:
         year = kwargs["year"]
         input_dir = Path("input") / str(year)
         cls.create_directory(input_dir)
@@ -65,17 +67,24 @@ class FileManager:
 
     @classmethod
     def create_directory(cls, dir_name: Union[str, Path]) -> None:
-        dir_path = Path(dir_name)
-        dir_path.mkdir(parents=True, exist_ok=True)
-
-        init_path = dir_path / cls.INIT_FILE
-        if not init_path.exists():
-            init_path.write_text("")
-            logger.debug(f"Created __init__.py in {dir_path}")
+        (Path(dir_name) / cls.INIT_FILE).parent.mkdir(parents=True, exist_ok=True)
+        (Path(dir_name) / cls.INIT_FILE).touch()
+        logger.debug(f"Created directory: {dir_name}")
 
     @classmethod
     def generate_text(cls, path: Union[str, Path], text: str) -> None:
-        file_path = Path(path)
-        file_path.parent.mkdir(parents=True, exist_ok=True)
-        file_path.write_text(text)
-        logger.debug(f"Generated file: {file_path}")
+        Path(path).write_text(text)
+        logger.debug(f"Generated: {path}")
+
+    @classmethod
+    def get_json(cls) -> dict:
+        path = Path(cls.RESULTS)
+        if path.exists():
+            with Path.open(path, "r") as f:
+                return json.load(f)
+        return {}
+
+    @classmethod
+    def save_json(cls, data: dict):
+        Path(cls.RESULTS).parent.mkdir(parents=True, exist_ok=True)
+        Path(cls.RESULTS).write_text(json.dumps(data, indent=2))
