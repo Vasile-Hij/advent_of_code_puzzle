@@ -1,22 +1,32 @@
 from typing import Any, Optional
 from pydantic import (
     BaseModel,
+    Field,
+    StrictBool,
     field_validator,
     StrictStr,
     StrictInt,
+    model_validator,
 )
 
 from utils import aoc_config
 
+ALLOWED_PATTERNS = {
+    ("id", "p"),  # -id 2025 -p a
+    ("id", "p", "s"),  # -id 2025 -p a -s s
+    ("id", "r"),  # -id 2025 -r 1
+}
+
 
 class LineInput(BaseModel):
     script_id: StrictInt
-    part: StrictStr
+    part: StrictStr | None
     sample: StrictStr | None
+    results: Optional[int] = None
 
     @field_validator("script_id", mode="before")
     @classmethod
-    def validate_script_id(cls, value: Any) -> int:
+    def validate_script_id(cls, value: int) -> StrictInt:
         if not value or len(str(value)) != 4:
             raise ValueError(
                 f'{value=} is not accepted! Try something like: "-id 2501"'
@@ -44,17 +54,32 @@ class LineInput(BaseModel):
 
     @field_validator("part", mode="before")
     @classmethod
-    def validate_part(cls, value: str) -> str:
+    def validate_part(cls, value: Any) -> StrictStr:
+        if value is None:
+            return None
+
         if value not in ("a", "b"):
             raise ValueError('Last character must be either "a" or "b"')
         return value
 
     @field_validator("sample", mode="before")
     @classmethod
-    def validate_sample(cls, value: Optional[str]) -> Optional[str]:
+    def validate_sample(cls, value: Optional[str]) -> Optional[StrictStr]:
         if value is not None and value != "s":
             raise ValueError('Sample should be "s"')
         return "sample" if value == "s" else None
+
+    @field_validator("results", mode="before")
+    @classmethod
+    def validate_results(cls, value: Any) -> bool:
+        print(type(value))
+        if value is None:
+            return False
+
+        if isinstance(value, int) and value == 1:
+            return True
+
+        raise ValueError(f"{value} is not accepted, only -r 1")
 
     @property
     def year(self) -> int:
@@ -63,3 +88,10 @@ class LineInput(BaseModel):
     @property
     def day(self) -> int:
         return self.script_id % 100
+
+    @model_validator(mode="after")
+    def check_pattern(self):
+        if self.part and self.results == 1:
+            raise ValueError(f"{ALLOWED_PATTERNS=} only")
+
+        return self

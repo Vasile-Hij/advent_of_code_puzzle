@@ -1,4 +1,5 @@
 from __future__ import annotations
+import json
 import logging
 from pathlib import Path
 from typing import Literal, TextIO, List, Union
@@ -13,6 +14,7 @@ class FileManager:
     INPUT_DAY_SAMPLE = "input/{year}/{day}_{sample}_{part}.txt"
     SCRIPT_PATH = "puzzle_solver.{year}.{day}"
     INIT_FILE = "__init__.py"
+    RESULTS = "puzzle_solved/results.json"
 
     @classmethod
     def get_path(cls, template: str, **kwargs) -> Path:
@@ -79,3 +81,18 @@ class FileManager:
         file_path.parent.mkdir(parents=True, exist_ok=True)
         file_path.write_text(text)
         logger.debug(f"Generated file: {file_path}")
+
+    @classmethod
+    def get_json(cls) -> dict:
+        path = Path(cls.RESULTS)
+        if path.exists():
+            with Path.open(path, "r") as f:
+                return json.load(f)
+        return {}
+
+    @classmethod
+    def save_json(cls, data: dict):
+        path = Path(cls.RESULTS).parent
+        path.mkdir(parents=True, exist_ok=True)
+        with Path.open(cls.RESULTS, "w") as f:
+            json.dump(data, f, indent=2)
