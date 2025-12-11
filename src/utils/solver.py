@@ -23,7 +23,7 @@ class Solver:
             logger.warning(f"Module {module_path} not found, creating template: {e}")
 
             script_dir = Path("puzzle_solver") / str(year)
-            cls.file_manager.create_directory(script_dir)
+            cls.file_manager.create_directory(script_dir)  # pyright: ignore[reportAttributeAccessIssue]
 
             script_file = script_dir / f"{day}.py"
             FileManager.generate_text(script_file, SCRIPT_TEXT)

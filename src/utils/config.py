@@ -28,7 +28,7 @@ class FileManager:
         return path_obj.open("r")
 
     @classmethod
-    def read_input_file(cls, template: str, **kwargs) -> Union[str, List[str]]:
+    def read_input_file(cls, template: str, **kwargs):
         year = kwargs["year"]
         input_dir = Path("input") / str(year)
         cls.create_directory(input_dir)
@@ -41,12 +41,25 @@ class FileManager:
             logger.info(f"Auto-created: {file_path}")
 
         with cls.retrieve(template, **kwargs) as file:
-            method: Literal["display_raw", "solve"] = kwargs["method"]
+            method: Literal["display_raw_sample", "display_raw_input_trim", "solve"] = (
+                kwargs["method"]
+            )
             match method:
-                case "display_raw":
+                case "display_raw_sample":
                     return file.read()
+
+                case "display_raw_input_trim":
+                    lines = []
+                    for _ in range(10):
+                        try:
+                            lines.append(next(file).rstrip())
+                        except StopIteration:
+                            break
+                    return f"{'\n'.join(lines)}\n..."
+
                 case "solve":
-                    return [line.rstrip("\n") for line in file]
+                    return tuple(line.rstrip("\n") for line in file)
+
                 case _:
                     raise ValueError(f"Unknown method: {method}")
 
