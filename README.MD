@@ -32,8 +32,6 @@ python main.py -id 2501 -p a -s s   # with sample input
 make down
 ```
 
-
-
 ## Make Commands
 
 ```bash
@@ -44,6 +42,9 @@ make up            # Activate virtual environment
 make down          # Deactivate virtual environment
 make lock          # Update dependencies
 make init          # Full initialization
+make lint          # Highlights semantic and stylistic issue
+make pyright       # Static type checke
+make test          # Run lint + pyright at once
 ```
 ## Workflow
 
