@@ -72,7 +72,6 @@ class LineInput(BaseModel):
     @field_validator("results", mode="before")
     @classmethod
     def validate_results(cls, value: Any) -> bool:
-        print(type(value))
         if value is None:
             return False
 
