@@ -27,8 +27,9 @@ Basic commands:
 ```bash
 make up
 python main.py -id 2501 -p a        # 2501 -> YYDD, a -> part a
-python main.py -id 2501 -p b        # part b
-python main.py -id 2501 -p a -s s   # with sample input
+python main.py -id 2501 -p b        # 2501 -> YYDD, a -> part b
+python main.py -id 2501 -p a -s s   # 2501 -> YYDD, a -> part a with sample input
+python main.py -id 2501 -r 1        # auto run both parts and dump results to JSON
 make down
 ```
 
@@ -43,7 +44,7 @@ make down          # Deactivate virtual environment
 make lock          # Update dependencies
 make init          # Full initialization
 make lint          # Highlights semantic and stylistic issue
-make pyright       # Static type checke
+make pyright       # Static type checker
 make test          # Run lint + pyright at once
 ```
 ## Workflow
