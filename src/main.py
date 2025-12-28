@@ -9,9 +9,11 @@ from utils.pydantic_model import LineInput
 logger = logging.getLogger(__name__)
 
 HELP_TEXT = """
-1. Year 2025, day 01, part a: "-id 2501 -p a", second part: "-id 2502 -p b"
-2. For sample day test add "-s s".
-Run e.g.: "python3 main.py -id 2501 -p a -s s"
+    1. You are starting with year 2025, day 1, part_a using a sample for part_a: `python3 main.py -id 2501 -p a -s s`
+    2. Now you are running script with your own input for part_a: `python main.py -id 2501 -p a`
+    3. Dump results to JSON for both parts: `python main.py -id 2501 -r 1`
+
+    Note: samples may differ from part_a and part_b sometimes, otherwise just reuse sample from one to another.
 """
 
 
@@ -89,7 +91,12 @@ class Command:
             results[year][day] = {}
 
         day_data = results[year][day]
-        for sample, part in [("s", "a"), ("s", "b"), (None, "a"), (None, "b")]:
+        for sample, part in [
+            ("sample", "a"),
+            ("sample", "b"),
+            (None, "a"),
+            (None, "b"),
+        ]:
             key = f"{'sample' if sample else 'input'}_{part}"
             day_data[key] = self.get_solved(year, day, sample, part)
 
