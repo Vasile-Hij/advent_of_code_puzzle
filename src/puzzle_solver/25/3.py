@@ -1,14 +1,9 @@
-from utils.core import SolverBase
 from collections import deque
 
 title = "--- Day 3: Lobby ---"
 
 
-class PuzzleSolver(SolverBase):
-    @classmethod
-    def helper(cls, puzzle_input):
-        return
-
+class PuzzleSolver:
     @classmethod
     def part_a(cls, puzzle_input):
         total = 0

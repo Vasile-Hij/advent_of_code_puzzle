@@ -12,11 +12,9 @@ YEAR_CHANGED: int = 25 - 1
 
 
 SCRIPT_TEXT: str = """
-from utils.core import SolverBase
-
 title = ''
 
-class PuzzleSolver(SolverBase):
+class PuzzleSolver:
     @classmethod
     def helper(cls, puzzle_input):
         return
