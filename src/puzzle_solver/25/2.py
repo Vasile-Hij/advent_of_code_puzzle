@@ -1,10 +1,9 @@
 import math
-from utils.core import SolverBase
 
 title = "Day 2: Gift Shop "
 
 
-class PuzzleSolver(SolverBase):
+class PuzzleSolver:
     @classmethod
     def helper(cls, puzzle_input, func):
         puzzle_input = next(elem.split(",") for elem in puzzle_input)

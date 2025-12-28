@@ -1,9 +1,7 @@
-from utils.core import SolverBase
-
 title = "Day 1: Secret Entrance"
 
 
-class PuzzleSolver(SolverBase):
+class PuzzleSolver:
     @classmethod
     def helper(cls, puzzle_input):
         return tuple((elem[0], int(elem[1:])) for elem in puzzle_input)
