@@ -1,6 +1,6 @@
 from utils.core import SolverBase
 
-title = ""
+title = "--- Day 4: Printing Department ---"
 
 
 class PuzzleSolver(SolverBase):
