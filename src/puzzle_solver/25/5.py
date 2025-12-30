@@ -28,8 +28,8 @@ class PuzzleSolver:
         max_range_end = max(interval.stop for interval in intervals)
 
         possible_ids = [num for num in ids if min_range_start <= num <= max_range_end]
-
         matches = 0
+
         for number in possible_ids:
             for interval in intervals:
                 if number < interval.start:
@@ -41,4 +41,13 @@ class PuzzleSolver:
 
     @classmethod
     def part_b(cls, puzzle_input):
-        return
+        intervals, _ = cls.sort_input(puzzle_input)
+        merged = []
+
+        for interval in intervals:
+            if not merged or merged[-1][1] < interval.start:
+                merged.append([interval.start, interval.stop])
+            else:
+                merged[-1][1] = max(merged[-1][1], interval.stop)
+
+        return sum(end - start for start, end in merged)
