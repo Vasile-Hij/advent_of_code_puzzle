@@ -2,7 +2,8 @@ from __future__ import annotations
 import json
 import logging
 from pathlib import Path
-from typing import Literal, TextIO, List, Union
+from typing import Literal, TextIO, Union
+from utils import aoc_config
 
 
 logger = logging.getLogger(__name__)
@@ -57,7 +58,11 @@ class FileManager:
                             lines.append(next(file).rstrip())
                         except StopIteration:
                             break
-                    return f"{'\n'.join(lines)}\n..."
+
+                    trimmed_lines = [
+                        (f"{line[: aoc_config.LINE_LENGTH]}...") for line in lines
+                    ]
+                    return f"{'\n'.join(trimmed_lines)}"
 
                 case "solve":
                     return tuple(line.rstrip("\n") for line in file)
