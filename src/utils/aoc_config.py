@@ -1,6 +1,7 @@
 from datetime import datetime
 
-LINE_LENGTH = 88
+INPUT_LINE_LENGTH = 88
+INPUT_ROWS_LENGTH = 10
 
 START_YEAR: int = 15
 CURRENT_YEAR: int = datetime.now().year % 100
