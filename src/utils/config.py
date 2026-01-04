@@ -53,16 +53,18 @@ class FileManager:
 
                 case "display_raw_input_trim":
                     lines = []
-                    for _ in range(10):
+                    for _ in range(aoc_config.INPUT_ROWS_LENGTH):
                         try:
-                            lines.append(next(file).rstrip())
+                            line = next(file).rstrip()
+                            lines.append(
+                                f"{line[: aoc_config.INPUT_LINE_LENGTH]}..."
+                                if len(line) > aoc_config.INPUT_LINE_LENGTH
+                                else line
+                            )
                         except StopIteration:
                             break
 
-                    trimmed_lines = [
-                        (f"{line[: aoc_config.LINE_LENGTH]}...") for line in lines
-                    ]
-                    return f"{'\n'.join(trimmed_lines)}"
+                    return f"{'\n'.join(lines)}"
 
                 case "solve":
                     return tuple(line.rstrip("\n") for line in file)
