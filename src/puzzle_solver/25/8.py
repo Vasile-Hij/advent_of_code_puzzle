@@ -4,6 +4,8 @@ from itertools import combinations
 
 title = "--- Day 8: Playground ---"
 
+Box = tuple[int, ...]
+
 
 class PuzzleSolver:
     @staticmethod
@@ -18,7 +20,7 @@ class PuzzleSolver:
 
     @classmethod
     def greedy_connect(cls, boxes, rows):
-        circuits = {B: (B,) for B in boxes}
+        circuits: dict[Box, tuple[Box, ...]] = {B: (B,) for B in boxes}
         for A, B in cls.closest_pairs(boxes, rows):
             if circuits[A] != circuits[B]:
                 new_circuit = circuits[A] + circuits[B]
