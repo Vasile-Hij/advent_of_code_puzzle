@@ -16,36 +16,40 @@ Clone and initialize:
 
 ```bash
 git clone https://github.com/Vasile-Hij/advent_of_code_puzzle
-cd advent-of-code-solver
-make init
+cd advent_of_code_puzzle
+just init
 ```
+
+This project uses [`just`](https://github.com/casey/just) as its command runner.
+Install it with `cargo install just`, `brew install just`, or `apt install just`.
 
 ## Usage
 
 Basic commands:
 
 ```bash
-make up
+just up
 python main.py -id 2501 -p a        # 2501 -> YYDD, a -> part a
 python main.py -id 2501 -p b        # 2501 -> YYDD, a -> part b
 python main.py -id 2501 -p a -s s   # 2501 -> YYDD, a -> part a with sample input
 python main.py -id 2501 -r 1        # auto run both parts and dump results to JSON
-make down
+just down
 ```
 
-## Make Commands
+## Just Commands
 
 ```bash
-make help          # Show all commands
-make install-uv    # Install uv package manager
-make setup         # Initialize project
-make up            # Activate virtual environment
-make down          # Deactivate virtual environment
-make lock          # Update dependencies
-make init          # Full initialization
-make lint          # Highlights semantic and stylistic issue
-make pyright       # Static type checker
-make test          # Run lint + pyright at once
+just               # Show all commands (same as `just help`)
+just --list        # Show all commands
+just install-uv    # Install uv package manager
+just setup         # Initialize project
+just up            # Activate virtual environment
+just down          # Deactivate virtual environment
+just lock          # Update dependencies
+just init          # Full initialization
+just lint          # Highlights semantic and stylistic issue
+just test          # Run the test suite
+just check         # Run lint + test at once
 ```
 ## Workflow
 
